@@ -1,85 +1,127 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { Alert, Button, Container, Form, Row, Col } from "react-bootstrap";
 
-import { Alert, Button, Container } from "react-bootstrap";
 const Homepage = () => {
   const [gameID, setGameID] = useState("");
 
   const location = useLocation();
   let errorMessage = location.state?.errMessage;
 
+  const pageStyles = {
+    background: "linear-gradient(135deg, #ffcc33, #ff66cc)",
+    backgroundSize: "cover",
+    backgroundAttachment: "fixed",
+    minHeight: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    color: "#fff",
+  };
+
+  const containerStyles = {
+    backgroundColor: "rgba(0, 0, 0, 0.75)",
+    padding: "2rem",
+    borderRadius: "10px",
+  };
+
+  const headingStyles = {
+    fontSize: "3rem",
+    fontWeight: "bold",
+    background: "linear-gradient(to right, #f39c12, #e74c3c)",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
+    marginBottom: "1.5rem",
+  };
+
   return (
-    <Container>
-      {errorMessage && (
-        <Alert variant="danger" dismissible>
-          {errorMessage}
-        </Alert>
-      )}
-      <div className="py-5 text-center">
-        <h1 className=" fw-bold">Rules</h1>
-        <ul className="col-md-8 fs-6 m-auto mt-4 mb-2 list-inline">
-          <li className="text-start">
-            Each player starts with a hand of 5 cards.
-          </li>
-          <li className="text-start">
-            The game starts with a deck of 52 cards (a standard deck of playing
-            cards).
-          </li>
-          <li className="text-start">
-            Players take turns playing cards from their hand, following a set of
-            rules that define what cards can be played when.
-          </li>
-          <li className="text-start">
-            A player can only play a card if it matches either the suit or the
-            rank of the top card on the discard pile.
-          </li>
-          <li className="text-start">
-            If a player cannot play a card, they must draw a card from the draw
-            pile. If the draw pile is empty, the game ends in a draw and no
-            player is declared a winner.
-          </li>
-          <li className="text-start">
-            The game ends when one player runs out of cardswho is declared the
-            winner.
-          </li>
-        </ul>
-        <br />
-        <strong className="col-md-8 fs-6 m-auto text-start">
-          BONUS: Aces, Kings, Queens and Jack are action cards. When one of
-          these is played the following actions occur:
-        </strong>
-        <ul className="col-md-8 fs-6 m-auto mt-3 mb-2 list-inline">
-          <li className="text-start">Ace(A): Skip the next player in turn</li>
-          <li className="text-start">
-            Kings(K): Reverse the sequence of who plays next{" "}
-          </li>
-          <li className="text-start">
-            Queens(Q): +2. Draw 2 cards from discard pile
-          </li>
-          <li className="text-start">
-            Jacks(J): +4. Draw 4 cards from discard pile
-          </li>
-        </ul>
-        <div className="d-flex flex-row m-auto col-md-8 mt-5">
-          <div className="w-100 p-3">
-            <input
-              type="text"
-              className="mx-2"
-              value={gameID}
-              onChange={(e) => setGameID(e.target.value)}
-            />
-            <Link to={gameID ? "/play" : null} state={{ gameID: gameID }}>
-              <Button disabled={!gameID}>Join game</Button>
-            </Link>
-          </div>
-          <div className="w-100 p-3">
-            <Link to="/play">
-              <Button>Create game</Button>
-            </Link>
-          </div>
+    <div style={pageStyles}>
+      <Container style={containerStyles}>
+        {errorMessage && (
+          <Alert variant="danger" dismissible>
+            {errorMessage}
+          </Alert>
+        )}
+
+        <div className="py-4 text-center w-100">
+          <h1 style={headingStyles}>Card Game Rules</h1>
+          <p className="lead col-md-8 m-auto mb-5">
+            Welcome to the card game! One player will create a game room, and
+            the other player will join using the provided game ID. The objective
+            is to play all your cards according to the rules below.
+          </p>
+
+          <h3 className="fw-bold mb-3">Game Rules</h3>
+          <ul className="col-md-8 text-start fs-5 list-unstyled">
+            <li>1. Each player starts with a hand of 5 cards.</li>
+            <li>2. The game starts with a standard 52-card deck.</li>
+            <li>3. Players take turns playing cards from their hand.</li>
+            <li>
+              4. Cards can be played if they match the rank or suit of the top
+              card on the discard pile.
+            </li>
+            <li>
+              5. If a player cannot play, they must draw a card. The game ends
+              in a draw if no cards remain in the draw pile.
+            </li>
+            <li>6. The game ends when one player plays all their cards and wins.</li>
+          </ul>
+
+          <h4 className="fw-bold mt-5">Bonus Actions</h4>
+          <p className="fs-6 mb-3">Certain cards have special effects when played:</p>
+          <ul className="col-md-8 text-start fs-5 list-unstyled">
+            <li>
+              <strong>Ace (A):</strong> Skip the next player’s turn.
+            </li>
+            <li>
+              <strong>King (K):</strong> Reverse the order of play.
+            </li>
+            <li>
+              <strong>Queen (Q):</strong> The next player draws 2 cards from the
+              deck.
+            </li>
+            <li>
+              <strong>Jack (J):</strong> The next player draws 4 cards from the
+              deck.
+            </li>
+          </ul>
+
+          <Row className="d-flex flex-row mt-5 justify-content-center">
+            <Col md={5} className="p-3 text-center">
+              <Form>
+                <Form.Group controlId="gameID">
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter Game ID"
+                    value={gameID}
+                    onChange={(e) => setGameID(e.target.value)}
+                    className="text-center"
+                  />
+                </Form.Group>
+                <Link to={gameID ? "/play" : "#"} state={{ gameID: gameID }}>
+                  <Button
+                    variant="primary"
+                    className="mt-3 w-100"
+                    disabled={!gameID}
+                  >
+                    Join Game
+                  </Button>
+                </Link>
+              </Form>
+            </Col>
+
+            <Col md={5} className="p-3 text-center">
+              <Link to="/play">
+                <Button variant="success" className="mt-3 w-100">
+                  Create Game
+                </Button>
+              </Link>
+            </Col>
+          </Row>
         </div>
-      </div>
-    </Container>
+      </Container>
+    </div>
   );
 };
 
