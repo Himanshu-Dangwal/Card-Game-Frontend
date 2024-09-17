@@ -25,16 +25,6 @@ const Homepage = () => {
     borderRadius: "10px",
   };
 
-  const headingStyles = {
-    fontSize: "3rem",
-    fontWeight: "bold",
-    background: "linear-gradient(to right, #f39c12, #e74c3c)",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
-    marginBottom: "1.5rem",
-  };
-
   return (
     <div style={pageStyles}>
       <Container style={containerStyles}>
@@ -45,7 +35,7 @@ const Homepage = () => {
         )}
 
         <div className="py-4 text-center w-100">
-          <h1 style={headingStyles}>Card Game Rules</h1>
+          <h1 className="fw-bold mb-4">Card Game Rules</h1>
           <p className="lead col-md-8 m-auto mb-5">
             Welcome to the card game! One player will create a game room, and
             the other player will join using the provided game ID. The objective
