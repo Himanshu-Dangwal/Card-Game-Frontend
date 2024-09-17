@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Alert, Button, Container, Form, Row, Col } from "react-bootstrap";
+import { FaCheckCircle } from "react-icons/fa"; // Import an icon for bullet points
 
 const Homepage = () => {
   const [gameID, setGameID] = useState("");
@@ -40,12 +41,41 @@ const Homepage = () => {
     color: "transparent",
   };
 
-  const buttonStyles = {
-    transition: "transform 0.2s ease-in-out",
+  const paragraphStyles = {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: "1.2rem",
+    lineHeight: "1.6",
   };
 
-  const buttonHoverStyles = {
-    transform: "scale(1.05)",
+  const gameRulesStyles = {
+    color: "#ffcc33",
+    fontFamily: "'Inter', sans-serif",
+    fontSize: "1.2rem",
+    lineHeight: "1.8",
+    marginBottom: "2rem",
+  };
+
+  const ruleItemStyles = {
+    display: "flex",
+    alignItems: "center",
+    marginBottom: "1rem",
+  };
+
+  const ruleIconStyles = {
+    marginRight: "1rem",
+    color: "#ffcc33",
+    fontSize: "1.5rem",
+  };
+
+  const bonusActionsHeadingStyles = {
+    marginTop: "3rem",
+    fontWeight: "bold",
+    fontSize: "1.8rem",
+    color: "#ff66cc",
+  };
+
+  const buttonStyles = {
+    transition: "transform 0.2s ease-in-out",
   };
 
   // Keyframes for background animation (using JS approach for CSS animation)
@@ -81,45 +111,79 @@ const Homepage = () => {
             </h1>
 
             {/* Instructions to Create and Join Game */}
-            <p className="lead col-md-8 m-auto mb-5">
-              Welcome to the card game! To play the game, one player must create a game room by clicking on <strong>"Create Game"</strong>.
-              A unique Game ID will be generated. The other player will use this Game ID to join the game by entering it in the <strong>"Enter Game ID"</strong> field.
+            <p style={paragraphStyles} className="lead col-md-8 m-auto mb-5">
+              Welcome to the card game! To play the game, one player must create
+              a game room by clicking on <strong>"Create Game"</strong>. A unique
+              Game ID will be generated. The other player will use this Game ID
+              to join the game by entering it in the <strong>"Enter Game ID"</strong>{" "}
+              field.
             </p>
 
+            {/* Styled Game Rules Section */}
             <h3 className="fw-bold mb-3">Game Rules</h3>
-            <ul className="col-md-8 text-start fs-5 list-unstyled">
-              <li>1. Each player starts with a hand of 5 cards.</li>
-              <li>2. The game starts with a standard 52-card deck.</li>
-              <li>3. Players take turns playing cards from their hand.</li>
-              <li>
-                4. Cards can be played if they match the rank or suit of the top
-                card on the discard pile.
+            <ul className="col-md-8 m-auto text-start list-unstyled" style={gameRulesStyles}>
+              <li style={ruleItemStyles}>
+                <FaCheckCircle style={ruleIconStyles} />
+                <span>Each player starts with a hand of 5 cards.</span>
               </li>
-              <li>
-                5. If a player cannot play, they must draw a card. The game ends
-                in a draw if no cards remain in the draw pile.
+              <li style={ruleItemStyles}>
+                <FaCheckCircle style={ruleIconStyles} />
+                <span>The game starts with a standard 52-card deck.</span>
               </li>
-              <li>
-                6. The game ends when one player plays all their cards and wins.
+              <li style={ruleItemStyles}>
+                <FaCheckCircle style={ruleIconStyles} />
+                <span>Players take turns playing cards from their hand.</span>
+              </li>
+              <li style={ruleItemStyles}>
+                <FaCheckCircle style={ruleIconStyles} />
+                <span>
+                  Cards can be played if they match the rank or suit of the top card on the discard pile.
+                </span>
+              </li>
+              <li style={ruleItemStyles}>
+                <FaCheckCircle style={ruleIconStyles} />
+                <span>
+                  If a player cannot play, they must draw a card. The game ends in a draw if no cards remain in the draw pile.
+                </span>
+              </li>
+              <li style={ruleItemStyles}>
+                <FaCheckCircle style={ruleIconStyles} />
+                <span>
+                  The game ends when one player plays all their cards and wins.
+                </span>
               </li>
             </ul>
 
-            <h4 className="fw-bold mt-5">Bonus Actions</h4>
-            <p className="fs-6 mb-3">Certain cards have special effects when played:</p>
-            <ul className="col-md-8 text-start fs-5 list-unstyled">
-              <li>
-                <strong>Ace (A):</strong> Skip the next player’s turn.
+            <h4 style={bonusActionsHeadingStyles}>Bonus Actions</h4>
+            <p style={paragraphStyles} className="fs-6 mb-3">
+              Certain cards have special effects when played:
+            </p>
+            <ul className="col-md-8 m-auto text-start list-unstyled" style={gameRulesStyles}>
+              <li style={ruleItemStyles}>
+                <FaCheckCircle style={ruleIconStyles} />
+                <span>
+                  <strong>Ace (A):</strong> Skip the next player’s turn.
+                </span>
               </li>
-              <li>
-                <strong>King (K):</strong> Reverse the order of play.
+              <li style={ruleItemStyles}>
+                <FaCheckCircle style={ruleIconStyles} />
+                <span>
+                  <strong>King (K):</strong> Reverse the order of play.
+                </span>
               </li>
-              <li>
-                <strong>Queen (Q):</strong> The next player draws 2 cards from the
-                deck.
+              <li style={ruleItemStyles}>
+                <FaCheckCircle style={ruleIconStyles} />
+                <span>
+                  <strong>Queen (Q):</strong> The next player draws 2 cards from the
+                  deck.
+                </span>
               </li>
-              <li>
-                <strong>Jack (J):</strong> The next player draws 4 cards from the
-                deck.
+              <li style={ruleItemStyles}>
+                <FaCheckCircle style={ruleIconStyles} />
+                <span>
+                  <strong>Jack (J):</strong> The next player draws 4 cards from the
+                  deck.
+                </span>
               </li>
             </ul>
 
@@ -166,8 +230,8 @@ const Homepage = () => {
             </Row>
           </div>
         </Container>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 };
 
